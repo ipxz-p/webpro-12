@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 19, 2023 at 02:44 PM
+-- Generation Time: Apr 20, 2023 at 02:41 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -43,9 +43,10 @@ CREATE TABLE `blogs` (
 --
 
 INSERT INTO `blogs` (`id`, `title`, `content`, `status`, `pinned`, `like`, `create_date`, `create_by_id`) VALUES
-(1, 'What is Lorem Ipsum?', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', '01', 0, 23, '2021-03-08 22:12:58', 1),
+(1, 'What is Lorem Ipsum?', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', '01', 0, 33, '2021-03-08 22:12:58', 1),
 (2, 'Why do we use it?', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).', '02', 0, 4, '2021-03-08 22:13:38', 2),
-(3, 'Where does it come from?', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '01', 0, 3, '2021-03-08 22:14:18', 1);
+(3, 'Where does it come from?', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '01', 0, 3, '2021-03-08 22:14:18', 1),
+(14, '5', '55', '01', 1, 0, '2023-04-20 12:39:45', 1);
 
 -- --------------------------------------------------------
 
@@ -67,8 +68,8 @@ CREATE TABLE `comments` (
 --
 
 INSERT INTO `comments` (`id`, `blog_id`, `comment`, `like`, `comment_date`, `comment_by_id`) VALUES
-(1, 1, 'I love your blog!', 0, '2021-03-08 22:14:41', NULL),
-(2, 1, 'Cool :)', 0, '2021-03-08 22:14:54', NULL);
+(1, 1, 'I love your', 0, '2021-03-08 22:14:41', 1),
+(2, 1, 'Cool :', 0, '2021-03-08 22:14:54', NULL);
 
 -- --------------------------------------------------------
 
@@ -106,7 +107,8 @@ INSERT INTO `images` (`id`, `blog_id`, `comment_id`, `file_path`, `upload_date`,
 (1, 1, NULL, '/uploads/cats1.png', '2021-03-16 14:03:36', NULL, 1),
 (2, 2, NULL, '/uploads/cats2.jpeg', '2021-03-16 14:04:27', NULL, 1),
 (3, 2, NULL, '/uploads/cats3.jpeg', '2021-03-16 14:51:56', NULL, 0),
-(4, 3, NULL, '/uploads/cats4.jpeg', '2022-03-27 22:45:23', NULL, 1);
+(4, 3, NULL, '/uploads/cats4.jpeg', '2022-03-27 22:45:23', NULL, 1),
+(7, 14, NULL, '\\uploads\\myImage-1681994385703.jpg', '2023-04-20 12:39:45', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -142,16 +144,17 @@ CREATE TABLE `users` (
   `email` varchar(100) DEFAULT NULL,
   `picture` varchar(200) DEFAULT NULL,
   `mobile` varchar(10) DEFAULT NULL,
-  `join_date` timestamp NOT NULL DEFAULT current_timestamp()
+  `join_date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `role` varchar(10) NOT NULL DEFAULT 'normal'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `password`, `first_name`, `last_name`, `email`, `picture`, `mobile`, `join_date`) VALUES
-(1, 'admin', '$2b$05$ZuF5bL8EVjt8XgfCnWTsCeWQq0hp.UkjG3t9jf2CXC1u7RTw4zpY2', 'Admin', 'Webpro', 'admin@webpro.com', NULL, '0998887777', '2022-04-16 07:31:40'),
-(2, 'author1', '$2b$05$ZuF5bL8EVjt8XgfCnWTsCeWQq0hp.UkjG3t9jf2CXC1u7RTw4zpY2', 'Author', 'First', 'author1@webpro.com', NULL, NULL, '2022-04-16 07:31:40');
+INSERT INTO `users` (`id`, `username`, `password`, `first_name`, `last_name`, `email`, `picture`, `mobile`, `join_date`, `role`) VALUES
+(1, 'admin', '$2b$05$ZuF5bL8EVjt8XgfCnWTsCeWQq0hp.UkjG3t9jf2CXC1u7RTw4zpY2', 'Admin', 'Webpro', 'admin@webpro.com', NULL, '0998887777', '2022-04-16 07:31:40', 'normal'),
+(2, 'author1', '$2b$05$ZuF5bL8EVjt8XgfCnWTsCeWQq0hp.UkjG3t9jf2CXC1u7RTw4zpY2', 'Author', 'First', 'author1@webpro.com', NULL, NULL, '2022-04-16 07:31:40', 'admin');
 
 --
 -- Indexes for dumped tables
@@ -207,7 +210,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `blogs`
 --
 ALTER TABLE `blogs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `comments`
@@ -219,7 +222,7 @@ ALTER TABLE `comments`
 -- AUTO_INCREMENT for table `images`
 --
 ALTER TABLE `images`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `tokens`
